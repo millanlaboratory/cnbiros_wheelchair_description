@@ -1,18 +1,9 @@
 <?xml version="1.0"?>
-<robot name="wheelchair">
-	
-<!-- ***************** Materials (colors) **************************-->
-	<material name="black">
-		<color rgba="0 0 0 1"/>
-	</material>
-	
-	<material name="grey">
-		<color rgba="0.8 0.8 0.8 1"/>
-	</material>
-	
-	<material name="green">
-		<color rgba="0 1 0 1"/>
-	</material>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="wheelchair">
+
+	<xacro:include filename="$(find cnbiros_wheelchair_description)/urdf/materials.urdf.xacro" />
+
+
 
 <!-- ****************** Wheelchair Base ************************** -->
 	<!-- Wheelchair Base - Link -->

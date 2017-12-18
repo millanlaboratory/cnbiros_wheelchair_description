@@ -1,0 +1,113 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="wheelchair">
+	<!-- Color are defined in materials.urdf.xacro -->
+
+	<xacro:property name="seat_size_x"		   value="0.48" />
+	<xacro:property name="seat_size_y"   	   value="0.51" />
+	<xacro:property name="seat_size_z"   	   value="0.12" />
+	<xacro:property name="seat_origin_x" 	   value="0.075" />
+	<xacro:property name="seat_origin_y" 	   value="0.00" />
+	<xacro:property name="seat_origin_z" 	   value="0.2975" />
+	<xacro:property name="seat_joint_effort"   value="1000.0" />
+	<xacro:property name="seat_joint_lower"    value="0.0" />
+	<xacro:property name="seat_joint_upper"    value="0.15" />
+	<xacro:property name="seat_joint_velocity" value="0.01" />
+	
+	<xacro:property name="back_size_x"		   value="0.12" />
+	<xacro:property name="back_size_y"   	   value="0.51" />
+	<xacro:property name="back_size_z"   	   value="0.83" />
+	<xacro:property name="back_origin_x" 	   value="-0.30" />
+	<xacro:property name="back_origin_y" 	   value="0.00" />
+	<xacro:property name="back_origin_z" 	   value="0.355" />
+	<xacro:property name="back_origin_pinch"   value="-0.3" />
+	<xacro:property name="back_joint_effort"   value="1000.0" />
+	<xacro:property name="back_joint_lower"    value="0.0" />
+	<xacro:property name="back_joint_upper"    value="0.15" />
+	<xacro:property name="back_joint_velocity" value="0.01" />
+	
+	<xacro:property name="platform_up_size_x"       value="0.50" />
+	<xacro:property name="platform_up_size_y"       value="${seat_size_y}" />
+	<xacro:property name="platform_up_size_z"       value="0.03" />
+	<xacro:property name="platform_up_origin_x"     value="-0.45" />
+	<xacro:property name="platform_up_origin_y"     value="0.0" />
+	<xacro:property name="platform_up_origin_z"     value="0.1" />
+	<xacro:property name="platform_down_size_x"     value="0.40" />
+	<xacro:property name="platform_down_size_y"     value="${seat_size_y}" />
+	<xacro:property name="platform_down_size_z"     value="0.03" />
+	<xacro:property name="platform_down_origin_x"   value="-0.4" />
+	<xacro:property name="platform_down_origin_y"   value="0.0" />
+	<xacro:property name="platform_down_origin_z"   value="-0.0445" />
+
+<!-- ****************** Platform macro ************************** -->
+	<xacro:macro name="platform" params="name parent *shape *location">
+		<joint name="${name}_joint" type="fixed">
+			<parent link="${parent}_link"/>
+			<child link="${name}_link"/>
+			<xacro:insert_block name="location"/>
+    	</joint>
+
+		<link name="${name}_link">
+			<visual>
+				<origin xyz="0 0 0" rpy="0 0 0" />
+				<geometry>
+					<xacro:insert_block name="shape"/>
+				</geometry>
+				<material name="grey"/>
+			</visual>
+
+			<collision>
+				<origin xyz="0 0 0" rpy="0 0 0" />
+				<geometry>
+					<xacro:insert_block name="shape"/>
+				</geometry>
+			</collision>
+		</link>
+	</xacro:macro>
+
+<!-- ****************** Platforms ************************** -->
+	<xacro:platform name="platform_up" parent="seat">
+		<box size="${platform_up_size_x} ${platform_up_size_y} ${platform_up_size_z}"/>
+		<origin xyz="${platform_up_origin_x} ${platform_up_origin_y} ${platform_up_origin_z}" rpy="0 0 0"/>
+	</xacro:platform>
+
+	<xacro:platform name="platform_down" parent="seat">
+		<box size="${platform_down_size_x} ${platform_down_size_y} ${platform_down_size_z}"/>
+		<origin xyz="${platform_down_origin_x} ${platform_down_origin_y} ${platform_down_origin_z}" rpy="0 0 0"/>
+	</xacro:platform>
+
+<!-- ****************** Seats ************************** -->
+	<!-- Wheelchair Seat -->
+	<link name="seat_link">
+		<visual>
+			<geometry>
+				<box size="${seat_size_x} ${seat_size_y} ${seat_size_z}"/>
+			</geometry>
+			<material name="black"/>
+		</visual>
+	</link>
+	
+	<joint name="seat_joint" type="prismatic">
+		<axis xyz="0 0 1"/>
+		<limit effort="${seat_joint_effort}" lower="${seat_joint_lower}" upper="${seat_joint_upper}" velocity="${seat_joint_velocity}"/>
+		<parent link="base_link"/>
+		<child link="seat_link"/>
+		<origin xyz="${seat_origin_x} ${seat_origin_y} ${seat_origin_z}" rpy="0 0 0"/>
+    </joint>
+
+	<!-- Wheelchair Back  -->
+	<link name="back_link">
+		<visual>
+			<geometry>
+				<box size="${back_size_x} ${back_size_y} ${back_size_z}"/>
+			</geometry>
+			<material name="black"/>
+		</visual>
+	</link>
+	
+	<joint name="back_joint" type="fixed">
+		<parent link="seat_link"/>
+		<child link="back_link"/>
+		<origin xyz="${back_origin_x} ${back_origin_y} ${back_origin_z}" rpy="0 ${back_origin_pinch} 0"/>
+    </joint>
+
+</robot>
