@@ -154,6 +154,11 @@
 			</geometry>
 			<material name="green"/>
 		</visual>
+		<collision>
+			<geometry>
+				<box size="${kinect_size_x} ${kinect_size_y} ${kinect_size_z}" />
+			</geometry>
+		</collision>
 	</link>
 	<!-- Kinect - Joint -->
 	<joint name="camera_joint" type="fixed">
