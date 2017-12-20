@@ -47,6 +47,13 @@
     	</joint>
 
 		<link name="${name}_link">
+			<inertial>
+				<mass value="2"/>
+				<inertia
+					ixx="1e-6" ixy="0.0" ixz="0.0"
+					iyy="1e-6" iyz="0.0"
+					izz="1e-6"/>
+			</inertial>
 			<visual>
 				<origin xyz="0 0 0" rpy="0 0 0" />
 				<geometry>
@@ -78,6 +85,13 @@
 <!-- ****************** Seats ************************** -->
 	<!-- Wheelchair Seat -->
 	<link name="seat_link">
+		<inertial>
+			<mass value="5"/>
+			<inertia
+				ixx="1e-6" ixy="0.0" ixz="0.0"
+				iyy="1e-6" iyz="0.0"
+				izz="1e-6"/>
+		</inertial>
 		<visual>
 			<geometry>
 				<box size="${seat_size_x} ${seat_size_y} ${seat_size_z}"/>
@@ -96,6 +110,13 @@
 
 	<!-- Wheelchair Back  -->
 	<link name="back_link">
+		<inertial>
+			<mass value="5"/>
+			<inertia
+				ixx="1e-6" ixy="0.0" ixz="0.0"
+				iyy="1e-6" iyz="0.0"
+				izz="1e-6"/>
+		</inertial>
 		<visual>
 			<geometry>
 				<box size="${back_size_x} ${back_size_y} ${back_size_z}"/>
@@ -109,5 +130,4 @@
 		<child link="back_link"/>
 		<origin xyz="${back_origin_x} ${back_origin_y} ${back_origin_z}" rpy="0 ${back_origin_pinch} 0"/>
     </joint>
-
 </robot>

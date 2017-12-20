@@ -1,0 +1,165 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="wheelchair">
+	<!-- Color are defined in materials.urdf.xacro -->
+
+
+	<xacro:property name="sonar_size_x"   value="0.012" />
+	<xacro:property name="sonar_size_y"   value="0.032" />
+	<xacro:property name="sonar_size_z"   value="0.015" />
+	
+	<xacro:property name="sonar_0xe0_x"   value="0.365" />
+	<xacro:property name="sonar_0xe0_y"   value="-0.10" />
+	<xacro:property name="sonar_0xe0_z"   value="-0.05" />
+
+	<xacro:property name="sonar_0xe2_x"   value="0.385" />
+	<xacro:property name="sonar_0xe2_y"   value="-0.265" />
+	<xacro:property name="sonar_0xe2_z"   value="0.01" />
+
+	<xacro:property name="sonar_0xe4_x"   value="-0.165" />
+	<xacro:property name="sonar_0xe4_y"   value="-0.265" />
+	<xacro:property name="sonar_0xe4_z"   value="0.205" />
+
+	<xacro:property name="sonar_0xe6_x"   value="-0.513" />
+	<xacro:property name="sonar_0xe6_y"   value="-0.265" />
+	<xacro:property name="sonar_0xe6_z"   value="0.2455" />
+	
+	<xacro:property name="sonar_0xe8_x"   value="-0.62" />
+	<xacro:property name="sonar_0xe8_y"   value="-0.238" />
+	<xacro:property name="sonar_0xe8_z"   value="0.3975" />
+	
+	<xacro:property name="sonar_0xea_x"   value="0.365" />
+	<xacro:property name="sonar_0xea_y"   value="0.10" />
+	<xacro:property name="sonar_0xea_z"   value="-0.05" />
+	
+	<xacro:property name="sonar_0xec_x"   value="0.385" />
+	<xacro:property name="sonar_0xec_y"   value="0.265" />
+	<xacro:property name="sonar_0xec_z"   value="0.01" />
+
+	<xacro:property name="sonar_0xee_x"   value="-0.165" />
+	<xacro:property name="sonar_0xee_y"   value="0.265" />
+	<xacro:property name="sonar_0xee_z"   value="0.205" />
+	
+	<xacro:property name="sonar_0xf0_x"   value="-0.513" />
+	<xacro:property name="sonar_0xf0_y"   value="0.265" />
+	<xacro:property name="sonar_0xf0_z"   value="0.2455" />
+	
+	<xacro:property name="sonar_0xf2_x"   value="-0.62" />
+	<xacro:property name="sonar_0xf2_y"   value="0.238" />
+	<xacro:property name="sonar_0xf2_z"   value="0.3975" />
+	
+	<xacro:property name="kinect_size_x"   value="0.12" />
+	<xacro:property name="kinect_size_y"   value="0.32" />
+	<xacro:property name="kinect_size_z"   value="0.15" />
+	<xacro:property name="kinect_offset_x" value="0.565" />
+	<xacro:property name="kinect_offset_y" value="0.0" />
+	<xacro:property name="kinect_offset_z" value="0.2975" />
+
+<!-- ****************** Sonar macro ***************************** -->
+
+	<xacro:macro name="sonar" params="name parent *location">
+		<joint name="${name}_joint" type="fixed">
+			<parent link="${parent}_link"/>
+			<child link="${name}_link"/>
+			<xacro:insert_block name="location"/>
+    	</joint>
+		<link name="${name}_link">
+			<inertial>
+				<mass value="1e-6"/>
+				<inertia
+					ixx="1e-6" ixy="0.0" ixz="0.0"
+					iyy="1e-6" iyz="0.0"
+					izz="1e-6"/>
+			</inertial>
+			<visual>
+				<geometry>
+					<box size="${sonar_size_x} ${sonar_size_y} ${sonar_size_z}" />
+				</geometry>
+				<material name="green"/>
+			</visual>
+
+			<collision>
+				<geometry>
+					<box size="${sonar_size_x} ${sonar_size_y} ${sonar_size_z}" />
+				</geometry>
+			</collision>
+		</link>
+	</xacro:macro>
+
+
+<!-- ****************** Sonars ***************************** -->
+
+	<!-- Sonar 0xe0 -->
+	<xacro:sonar name="sonar_0xe0" parent="base" >
+		<origin xyz="${sonar_0xe0_x} ${sonar_0xe0_y} ${sonar_0xe0_z}" />
+	</xacro:sonar>
+
+	<!-- Sonar 0xe2 -->
+	<xacro:sonar name="sonar_0xe2" parent="base" >
+		<origin xyz="${sonar_0xe2_x} ${sonar_0xe2_y} ${sonar_0xe2_z}" />
+	</xacro:sonar>
+	
+	<!-- Sonar 0xe4 -->
+	<xacro:sonar name="sonar_0xe4" parent="base" >
+		<origin xyz="${sonar_0xe4_x} ${sonar_0xe4_y} ${sonar_0xe4_z}" rpy="0 0 ${-M_PI/2}" />
+	</xacro:sonar>
+	
+	<!-- Sonar 0xe6 -->
+	<xacro:sonar name="sonar_0xe6" parent="base" >
+		<origin xyz="${sonar_0xe6_x} ${sonar_0xe6_y} ${sonar_0xe6_z}" rpy="0 0 ${-M_PI/2}"/>
+	</xacro:sonar>
+
+	<!-- Sonar 0xe8 -->
+	<xacro:sonar name="sonar_0xe8" parent="base" >
+		<origin xyz="${sonar_0xe8_x} ${sonar_0xe8_y} ${sonar_0xe8_z}" rpy="0 0 ${-M_PI}"/>
+	</xacro:sonar>
+	
+	<!-- Sonar 0xea -->
+	<xacro:sonar name="sonar_0xea" parent="base" >
+		<origin xyz="${sonar_0xea_x} ${sonar_0xea_y} ${sonar_0xea_z}" />
+	</xacro:sonar>
+	
+	<!-- Sonar 0xec -->
+	<xacro:sonar name="sonar_0xec" parent="base" >
+		<origin xyz="${sonar_0xec_x} ${sonar_0xec_y} ${sonar_0xec_z}" />
+	</xacro:sonar>
+	
+	<!-- Sonar 0xee -->
+	<xacro:sonar name="sonar_0xee" parent="base" >
+		<origin xyz="${sonar_0xee_x} ${sonar_0xee_y} ${sonar_0xee_z}" rpy="0 0 ${M_PI/2}"/>
+	</xacro:sonar>
+
+	<!-- Sonar 0xf0 -->
+	<xacro:sonar name="sonar_0xf0" parent="base" >
+		<origin xyz="${sonar_0xf0_x} ${sonar_0xf0_y} ${sonar_0xf0_z}" rpy="0 0 ${M_PI/2}"/>
+	</xacro:sonar>
+	
+	<!-- Sonar 0xf2 -->
+	<xacro:sonar name="sonar_0xf2" parent="base" >
+		<origin xyz="${sonar_0xf2_x} ${sonar_0xf2_y} ${sonar_0xf2_z}" rpy="0 0 ${-M_PI}"/>
+	</xacro:sonar>
+
+<!-- ****************** Kinect ***************************** -->
+	<!-- Kinect - Link -->
+	<link name="camera_link">
+		<inertial>
+			<mass value="0.5"/>
+			<inertia
+				ixx="1e-6" ixy="0.0" ixz="0.0"
+				iyy="1e-6" iyz="0.0"
+				izz="1e-6"/>
+		</inertial>
+		<visual>
+			<geometry>
+				<box size="${kinect_size_x} ${kinect_size_y} ${kinect_size_z}" />
+			</geometry>
+			<material name="green"/>
+		</visual>
+	</link>
+	<!-- Kinect - Joint -->
+	<joint name="camera_joint" type="fixed">
+		<parent link="base_link"/>
+		<child link="camera_link"/>
+		<origin xyz="${kinect_offset_x} ${kinect_offset_y} ${kinect_offset_z}"/>
+    </joint>
+</robot>
+

@@ -36,6 +36,13 @@
 			<xacro:insert_block name="location"/>
     	</joint>
 		<link name="${name}_link">
+			<inertial>
+				<mass value="5"/>
+				<inertia
+					ixx="1" ixy="0.0" ixz="0.0"
+					iyy="1" iyz="0.0"
+					izz="1"/>
+			</inertial>
 			<visual>
 				<origin xyz="0 0 0" rpy="0 ${M_PI/2} ${M_PI/2}" />
 				<geometry>
@@ -56,6 +63,13 @@
 <!-- ******************  Base ************************** -->
 	<!-- Wheelchair Base - Link -->
 	<link name="base_link">
+		<inertial>
+			<mass value="100"/>
+			<inertia
+				ixx="1" ixy="0.0" ixz="0.0"
+				iyy="1" iyz="0.0"
+				izz="1"/>
+		</inertial>
 		<visual>
 			<origin xyz="${base_origin_x} ${base_origin_y} ${base_origin_z}" rpy="0 0 0"/>
 			<geometry>
@@ -70,7 +84,6 @@
 				<box size="${base_size_x} ${base_size_y} ${base_size_z}"/>
 			</geometry>
 		</collision>
-
 	</link>
 
 <!-- ****************** Wheels ************************** -->
