@@ -1,0 +1,425 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="wheelchair">
+	<!-- Color are defined in materials.urdf.xacro -->
+
+	<xacro:property name="M_PI" value="3.1415926535897931" />
+
+	<!-- Base origin and size -->
+	<xacro:property name="base_size_x"   value="0.462" />
+	<xacro:property name="base_size_y"   value="0.310" />
+	<xacro:property name="base_size_z"   value="0.270" />
+	
+	<xacro:property name="base_origin_x" value="0.000" />
+	<xacro:property name="base_origin_y" value="0.000" />
+	<xacro:property name="base_origin_z" value="0.000" />
+	
+	<xacro:property name="base_offset_z" value="0.073" />
+
+	<!-- Wheels size and offsets-->
+	<xacro:property name="wheel_main_radius"      value="0.167" />
+	<xacro:property name="wheel_main_width"       value="0.072" />
+	<xacro:property name="wheel_secondary_radius" value="0.070" />
+	<xacro:property name="wheel_secondary_width"  value="0.046" />
+
+	<xacro:property name="wheel_main_offset_x"    value="0.033" />
+	<xacro:property name="wheel_main_offset_y"    value="-0.278" />
+	<xacro:property name="wheel_main_offset_z"    value="${wheel_main_radius-base_offset_z-base_size_z/2}" />
+	<xacro:property name="wheel_front_offset_x"   value="0.323" />
+	<xacro:property name="wheel_front_offset_y"   value="-0.257" />
+	<xacro:property name="wheel_front_offset_z"   value="${wheel_secondary_radius-base_offset_z-base_size_z/2}" />
+	<xacro:property name="wheel_back_offset_x"    value="-0.436" />
+	<xacro:property name="wheel_back_offset_y"    value="-0.187" />
+	<xacro:property name="wheel_back_offset_z"    value="${wheel_secondary_radius-base_offset_z-base_size_z/2}" />
+	
+	<!-- Upper-base size and offset (related to base link)-->
+	<xacro:property name="upperbase_size_x" 	   value="0.491" />
+	<xacro:property name="upperbase_size_y" 	   value="0.247" />
+	<xacro:property name="upperbase_size_z" 	   value="0.040" />
+	
+	<xacro:property name="upperbase_offset_x" 	   value="-0.063" />
+	<xacro:property name="upperbase_offset_y" 	   value="0.000" />
+	<xacro:property name="upperbase_offset_z" 	   value="0.199" />
+	
+	<!-- Back structure size and offset (related to upperbase) -->
+	<xacro:property name="backstructure_size_x"		value="0.020" />
+	<xacro:property name="backstructure_size_y" 	value="0.460" />
+	<xacro:property name="backstructure_size_z" 	value="0.620" />
+	
+	<xacro:property name="backstructure_offset_x"	value="-0.162" />
+	<xacro:property name="backstructure_offset_y"	value="0.000" />
+	<xacro:property name="backstructure_offset_z"	value="0.352" />
+
+	<!-- Armrest and offset (related to upperbase) -->
+	<xacro:property name="armrest_size_x"			value="0.278" />
+	<xacro:property name="armrest_size_y"			value="0.056" />
+	<xacro:property name="armrest_size_z"			value="0.036" />
+	
+	<xacro:property name="armrest_offset_x"			value="0.068" />
+	<xacro:property name="armrest_offset_y"			value="-0.288" />
+	<xacro:property name="armrest_offset_z"			value="0.318" />
+	
+	<!-- Bottomseat and offset (related to upperbase) -->
+	<xacro:property name="bottomseat_size_x"		value="0.440" />
+	<xacro:property name="bottomseat_size_y"		value="0.490" />
+	<xacro:property name="bottomseat_size_z"		value="0.130" />
+	
+	<xacro:property name="bottomseat_offset_x"		value="0.109" />
+	<xacro:property name="bottomseat_offset_y"		value="0.000" />
+	<xacro:property name="bottomseat_offset_z"		value="0.151" />
+
+	<!-- Backseat and offset (related to upperbase) -->
+	<xacro:property name="backseat_size_x"			value="0.130" />
+	<xacro:property name="backseat_size_y"			value="0.460" />
+	<xacro:property name="backseat_size_z"			value="0.640" />
+	
+	<xacro:property name="backseat_offset_x"		value="-0.047" />
+	<xacro:property name="backseat_offset_y"		value="0.000" />
+	<xacro:property name="backseat_offset_z"		value="0.502" />
+
+	<!-- Lowerplatform and offset (related to upperbase) -->
+	<xacro:property name="lowerplatform_size_x"		value="0.212" />
+	<xacro:property name="lowerplatform_size_y"		value="0.491" />
+	<xacro:property name="lowerplatform_size_z"		value="0.005" />
+	
+	<xacro:property name="lowerplatform_offset_x"	value="-0.284" />
+	<xacro:property name="lowerplatform_offset_y"	value="0.000" />
+	<xacro:property name="lowerplatform_offset_z"	value="0.083" />
+
+	<!-- Upperplatform and offset (related to upperbase) -->
+	<xacro:property name="upperplatform_size_x"		value="0.310" />
+	<xacro:property name="upperplatform_size_y"		value="0.391" />
+	<xacro:property name="upperplatform_size_z"		value="0.010" />
+	
+	<xacro:property name="upperplatform_offset_x"	value="-0.307" />
+	<xacro:property name="upperplatform_offset_y"	value="0.000" />
+	<xacro:property name="upperplatform_offset_z"	value="0.268" />
+
+<!-- ****************** Wheel macro ************************** -->
+	<xacro:macro name="wheel" params="name parent *shape *location">
+		<joint name="${name}_joint" type="continuous">
+			<axis rpy="0 0 0" xyz="0 1 0"/>
+			<parent link="${parent}_link"/>
+			<child link="${name}_link"/>
+			<xacro:insert_block name="location"/>
+    	</joint>
+		<link name="${name}_link">
+			<inertial>
+				<mass value="5"/>
+				<inertia
+					ixx="1" ixy="0.0" ixz="0.0"
+					iyy="1" iyz="0.0"
+					izz="1"/>
+			</inertial>
+			<visual>
+				<origin xyz="0 0 0" rpy="0 ${M_PI/2} ${M_PI/2}" />
+				<geometry>
+					<xacro:insert_block name="shape"/>
+				</geometry>
+				<material name="grey"/>
+			</visual>
+
+			<collision>
+				<origin xyz="0 0 0" rpy="0 ${M_PI/2} ${M_PI/2}" />
+				<geometry>
+					<xacro:insert_block name="shape"/>
+				</geometry>
+			</collision>
+		</link>
+	</xacro:macro>
+
+<!-- ******************  Base ************************** -->
+	<link name="base_link">
+		<inertial>
+			<mass value="100"/>
+			<inertia
+				ixx="1" ixy="0.0" ixz="0.0"
+				iyy="1" iyz="0.0"
+				izz="1"/>
+		</inertial>
+		<visual>
+			<origin xyz="${base_origin_x} ${base_origin_y} ${base_origin_z}" rpy="0 0 0"/>
+			<geometry>
+				<box size="${base_size_x} ${base_size_y} ${base_size_z}"/>
+			</geometry>
+			<material name="black"/>
+		</visual>
+
+		<collision>
+			<origin xyz="${base_origin_x} ${base_origin_y} ${base_origin_z}" rpy="0 0 0"/>
+			<geometry>
+				<box size="${base_size_x} ${base_size_y} ${base_size_z}"/>
+			</geometry>
+		</collision>
+	</link>
+
+<!-- ******************  UpperBase ************************** -->
+	<joint name="upperbase_joint" type="prismatic">
+		<parent link="base_link"/>
+		<axis xyz="0 0 1"/>
+		<child link="upperbase_link"/>
+		<limit effort="1000.0" lower="0.0" upper="0.100" velocity="0.01"/>
+		<origin xyz="${upperbase_offset_x} ${upperbase_offset_y} ${upperbase_offset_z}"/>
+    </joint>
+
+	<link name="upperbase_link">
+		<inertial>
+			<mass value="10"/>
+			<inertia
+				ixx="1" ixy="0.0" ixz="0.0"
+				iyy="1" iyz="0.0"
+				izz="1"/>
+		</inertial>
+		<visual>
+			<geometry>
+				<box size="${upperbase_size_x} ${upperbase_size_y} ${upperbase_size_z}"/>
+			</geometry>
+			<material name="black"/>
+		</visual>
+
+		<collision>
+			<geometry>
+				<box size="${upperbase_size_x} ${upperbase_size_y} ${upperbase_size_z}"/>
+			</geometry>
+		</collision>
+	</link>
+
+<!-- ******************  BackStructure ************************** -->
+	<joint name="backstructure_joint" type="fixed">
+		<parent link="upperbase_link"/>
+		<child link="backstructure_link"/>
+		<origin xyz="${backstructure_offset_x} ${backstructure_offset_y} ${backstructure_offset_z}"/>
+    </joint>
+
+	<link name="backstructure_link">
+		<inertial>
+			<mass value="10"/>
+			<inertia
+				ixx="1" ixy="0.0" ixz="0.0"
+				iyy="1" iyz="0.0"
+				izz="1"/>
+		</inertial>
+		<visual>
+			<geometry>
+				<box size="${backstructure_size_x} ${backstructure_size_y} ${backstructure_size_z}"/>
+			</geometry>
+			<material name="black"/>
+		</visual>
+
+		<collision>
+			<geometry>
+				<box size="${backstructure_size_x} ${backstructure_size_y} ${backstructure_size_z}"/>
+			</geometry>
+		</collision>
+	</link>
+
+<!-- ******************  Bottomseat ************************** -->
+	<joint name="bottomseat_joint" type="fixed">
+		<parent link="upperbase_link"/>
+		<child link="bottomseat_link"/>
+		<origin xyz="${bottomseat_offset_x} ${bottomseat_offset_y} ${bottomseat_offset_z}"/>
+    </joint>
+
+	<link name="bottomseat_link">
+		<inertial>
+			<mass value="10"/>
+			<inertia
+				ixx="1" ixy="0.0" ixz="0.0"
+				iyy="1" iyz="0.0"
+				izz="1"/>
+		</inertial>
+		<visual>
+			<geometry>
+				<box size="${bottomseat_size_x} ${bottomseat_size_y} ${bottomseat_size_z}"/>
+			</geometry>
+			<material name="darkgrey"/>
+		</visual>
+
+		<collision>
+			<geometry>
+				<box size="${bottomseat_size_x} ${bottomseat_size_y} ${bottomseat_size_z}"/>
+			</geometry>
+		</collision>
+	</link>
+
+<!-- ******************  Backseat ************************** -->
+	<joint name="backseat_joint" type="fixed">
+		<parent link="upperbase_link"/>
+		<child link="backseat_link"/>
+		<origin xyz="${backseat_offset_x} ${backseat_offset_y} ${backseat_offset_z}"/>
+    </joint>
+
+	<link name="backseat_link">
+		<inertial>
+			<mass value="10"/>
+			<inertia
+				ixx="1" ixy="0.0" ixz="0.0"
+				iyy="1" iyz="0.0"
+				izz="1"/>
+		</inertial>
+		<visual>
+			<geometry>
+				<box size="${backseat_size_x} ${backseat_size_y} ${backseat_size_z}"/>
+			</geometry>
+			<material name="darkgrey"/>
+		</visual>
+
+		<collision>
+			<geometry>
+				<box size="${backseat_size_x} ${backseat_size_y} ${backseat_size_z}"/>
+			</geometry>
+		</collision>
+	</link>
+
+<!-- ******************  LowerPlatform ************************** -->
+	<joint name="lowerplatform_joint" type="fixed">
+		<parent link="upperbase_link"/>
+		<child link="lowerplatform_link"/>
+		<origin xyz="${lowerplatform_offset_x} ${lowerplatform_offset_y} ${lowerplatform_offset_z}"/>
+    </joint>
+
+	<link name="lowerplatform_link">
+		<inertial>
+			<mass value="10"/>
+			<inertia
+				ixx="1" ixy="0.0" ixz="0.0"
+				iyy="1" iyz="0.0"
+				izz="1"/>
+		</inertial>
+		<visual>
+			<geometry>
+				<box size="${lowerplatform_size_x} ${lowerplatform_size_y} ${lowerplatform_size_z}"/>
+			</geometry>
+			<material name="grey"/>
+		</visual>
+
+		<collision>
+			<geometry>
+				<box size="${lowerplatform_size_x} ${lowerplatform_size_y} ${lowerplatform_size_z}"/>
+			</geometry>
+		</collision>
+	</link>
+
+<!-- ******************  UpperPlatform ************************** -->
+	<joint name="upperplatform_joint" type="fixed">
+		<parent link="upperbase_link"/>
+		<child link="upperplatform_link"/>
+		<origin xyz="${upperplatform_offset_x} ${upperplatform_offset_y} ${upperplatform_offset_z}"/>
+    </joint>
+
+	<link name="upperplatform_link">
+		<inertial>
+			<mass value="10"/>
+			<inertia
+				ixx="1" ixy="0.0" ixz="0.0"
+				iyy="1" iyz="0.0"
+				izz="1"/>
+		</inertial>
+		<visual>
+			<geometry>
+				<box size="${upperplatform_size_x} ${upperplatform_size_y} ${upperplatform_size_z}"/>
+			</geometry>
+			<material name="grey"/>
+		</visual>
+
+		<collision>
+			<geometry>
+				<box size="${upperplatform_size_x} ${upperplatform_size_y} ${upperplatform_size_z}"/>
+			</geometry>
+		</collision>
+	</link>
+<!-- ******************  Armrests ************************** -->
+	<joint name="armrest_right_joint" type="fixed">
+		<parent link="upperbase_link"/>
+		<child link="armrest_right_link"/>
+		<origin xyz="${armrest_offset_x} ${armrest_offset_y} ${armrest_offset_z}"/>
+    </joint>
+
+	<link name="armrest_right_link">
+		<inertial>
+			<mass value="10"/>
+			<inertia
+				ixx="1" ixy="0.0" ixz="0.0"
+				iyy="1" iyz="0.0"
+				izz="1"/>
+		</inertial>
+		<visual>
+			<geometry>
+				<box size="${armrest_size_x} ${armrest_size_y} ${armrest_size_z}"/>
+			</geometry>
+			<material name="black"/>
+		</visual>
+
+		<collision>
+			<geometry>
+				<box size="${armrest_size_x} ${armrest_size_y} ${armrest_size_z}"/>
+			</geometry>
+		</collision>
+	</link>
+
+	<joint name="armrest_left_joint" type="fixed">
+		<parent link="upperbase_link"/>
+		<child link="armrest_left_link"/>
+		<origin xyz="${armrest_offset_x} ${-armrest_offset_y} ${armrest_offset_z}"/>
+    </joint>
+
+	<link name="armrest_left_link">
+		<inertial>
+			<mass value="10"/>
+			<inertia
+				ixx="1" ixy="0.0" ixz="0.0"
+				iyy="1" iyz="0.0"
+				izz="1"/>
+		</inertial>
+		<visual>
+			<geometry>
+				<box size="${armrest_size_x} ${armrest_size_y} ${armrest_size_z}"/>
+			</geometry>
+			<material name="black"/>
+		</visual>
+
+		<collision>
+			<geometry>
+				<box size="${armrest_size_x} ${armrest_size_y} ${armrest_size_z}"/>
+			</geometry>
+		</collision>
+	</link>
+
+
+<!-- ****************** Wheels ************************** -->
+	<!-- Wheelchair Wheel0 - Link -->
+	<xacro:wheel name="wheel0" parent="base">
+		<cylinder radius="${wheel_main_radius}" length="${wheel_main_width}"/>
+		<origin xyz="${wheel_main_offset_x} ${wheel_main_offset_y} ${wheel_main_offset_z}" rpy="0 0 0"/>
+	</xacro:wheel>
+
+	<!-- Wheelchair Wheel1 - Link -->
+	<xacro:wheel name="wheel1" parent="base">
+		<cylinder radius="${wheel_main_radius}" length="${wheel_main_width}"/>
+		<origin xyz="${wheel_main_offset_x} ${-wheel_main_offset_y} ${wheel_main_offset_z}" rpy="0 0 0"/>
+	</xacro:wheel>
+
+	<!-- Wheelchair BackWheel0 - Link -->
+	<xacro:wheel name="backwheel0" parent="base">
+		<cylinder radius="${wheel_secondary_radius}" length="${wheel_secondary_width}"/>
+		<origin xyz="${wheel_back_offset_x} ${wheel_back_offset_y} ${wheel_back_offset_z}" rpy="0 0 0"/>
+	</xacro:wheel>
+
+	<!-- Wheelchair BackWheel1 - Link -->
+	<xacro:wheel name="backwheel1" parent="base">
+		<cylinder radius="${wheel_secondary_radius}" length="${wheel_secondary_width}"/>
+		<origin xyz="${wheel_back_offset_x} ${-wheel_back_offset_y} ${wheel_back_offset_z}" rpy="0 0 0"/>
+	</xacro:wheel>
+	
+	<!-- Wheelchair FrontWheel0 - Link -->
+	<xacro:wheel name="frontwheel0" parent="base">
+		<cylinder radius="${wheel_secondary_radius}" length="${wheel_secondary_width}"/>
+		<origin xyz="${wheel_front_offset_x} ${wheel_front_offset_y} ${wheel_front_offset_z}" rpy="0 0 0"/>
+	</xacro:wheel>
+	
+	<!-- Wheelchair FrontWheel1 - Link -->
+	<xacro:wheel name="frontwheel1" parent="base">
+		<cylinder radius="${wheel_secondary_radius}" length="${wheel_secondary_width}"/>
+		<origin xyz="${wheel_front_offset_x} ${-wheel_front_offset_y} ${wheel_front_offset_z}" rpy="0 0 0"/>
+	</xacro:wheel>
+
+</robot>
