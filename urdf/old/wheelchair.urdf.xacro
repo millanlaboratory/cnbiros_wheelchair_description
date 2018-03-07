@@ -7,9 +7,13 @@
 	<!-- Base urdf -->
 	<xacro:include filename="$(find cnbiros_wheelchair_description)/urdf/base.urdf.xacro" />
 
+	<!-- Upper part urdf -->
+	<xacro:include filename="$(find cnbiros_wheelchair_description)/urdf/seat.urdf.xacro" />
+
 	<!-- Sensors urdf -->
 	<xacro:include filename="$(find cnbiros_wheelchair_description)/urdf/sensors.urdf.xacro" />
 
 	<!-- Gazebo -->
 	<xacro:include filename="$(find cnbiros_wheelchair_description)/urdf/wheelchair.gazebo" />
+
 </robot>
