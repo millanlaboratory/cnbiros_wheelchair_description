@@ -99,7 +99,7 @@
 
 	<!-- Sonar 0xe2 -->
 	<xacro:sonar name="sonar_0xe2" parent="base" >
-		<origin xyz="${sonar_0xe2_x} ${sonar_0xe2_y} ${sonar_0xe2_z}" rpy="0 ${-M_PI/4} ${-M_PI/5}"/>
+		<origin xyz="${sonar_0xe2_x} ${sonar_0xe2_y} ${sonar_0xe2_z}" rpy="0 ${-M_PI/4} ${-M_PI/4}"/>
 	</xacro:sonar>
 	
 	<!-- Sonar 0xe4 -->
@@ -124,7 +124,7 @@
 	
 	<!-- Sonar 0xec -->
 	<xacro:sonar name="sonar_0xec" parent="base" >
-		<origin xyz="${sonar_0xec_x} ${sonar_0xec_y} ${sonar_0xec_z}" rpy="0 ${-M_PI/4} ${M_PI/5}"/>
+		<origin xyz="${sonar_0xec_x} ${sonar_0xec_y} ${sonar_0xec_z}" rpy="0 ${-M_PI/4} ${M_PI/4}"/>
 	</xacro:sonar>
 	
 	<!-- Sonar 0xee -->
