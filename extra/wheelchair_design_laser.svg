@@ -2932,9 +2932,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="1"
      inkscape:pageshadow="2"
-     inkscape:zoom="0.064201994"
-     inkscape:cx="-1009.6869"
-     inkscape:cy="2244.9163"
+     inkscape:zoom="0.25680797"
+     inkscape:cx="3539.5792"
+     inkscape:cy="2056.4162"
      inkscape:document-units="cm"
      inkscape:current-layer="layer4"
      showgrid="true"
@@ -3051,6 +3051,10 @@
        position="3450.0487,2838.6971"
        orientation="0,1"
        id="guide6601" />
+    <sodipodi:guide
+       position="3819.9749,3087.9106"
+       orientation="0,1"
+       id="guide6603" />
   </sodipodi:namedview>
   <metadata
      id="metadata7">
