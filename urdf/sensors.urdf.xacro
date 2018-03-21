@@ -11,6 +11,11 @@
 	<xacro:property name="kinect_size_x"	value="0.061" />
 	<xacro:property name="kinect_size_y"	value="0.280" />
 	<xacro:property name="kinect_size_z"	value="0.038" />
+	
+	<!-- Hokuyo size -->
+	<xacro:property name="hokuyo_size_x"	value="0.050" />
+	<xacro:property name="hokuyo_size_y"	value="0.050" />
+	<xacro:property name="hokuyo_size_z"	value="0.070" />
 
 	<!-- Ultrasonic offset (with respect to base (e2, ec) or to upperbase) -->
 	<xacro:property name="sonar_0xe0_x"		value="0.324" />	<!-- TEMP -->
@@ -56,7 +61,12 @@
 	<!-- Kinect offset (with respect to upperbase) -->
 	<xacro:property name="kinect_offset_x"	value="0.294" />	<!-- TEMP -->
 	<xacro:property name="kinect_offset_y" 	value="0.000" />	<!-- TEMP -->
-	<xacro:property name="kinect_offset_z" 	value="0.002" />	<!-- TEMP -->
+	<xacro:property name="kinect_offset_z" 	value="0.105" />	<!-- TEMP -->
+	
+	<!-- Hokuyo offset (with respect to upperbase) -->
+	<xacro:property name="hokuyo_offset_x"	value="0.272" />	<!-- TEMP -->
+	<xacro:property name="hokuyo_offset_y" 	value="0.000" />	<!-- TEMP -->
+	<xacro:property name="hokuyo_offset_z" 	value="0.035" />	<!-- TEMP -->
 
 <!-- ****************** Sonar macro ***************************** -->
 
@@ -170,5 +180,35 @@
 		<child link="camera_link"/>
 		<origin xyz="${kinect_offset_x} ${kinect_offset_y} ${kinect_offset_z}"/>
     </joint>
+
+<!-- ****************** Hokuyo ***************************** -->
+	<!-- Hokuyo - Link -->
+	<link name="hokuyo_link">
+		<inertial>
+			<mass value="0.5"/>
+			<inertia
+				ixx="1e-6" ixy="0.0" ixz="0.0"
+				iyy="1e-6" iyz="0.0"
+				izz="1e-6"/>
+		</inertial>
+		<visual>
+			<geometry>
+				<box size="${hokuyo_size_x} ${hokuyo_size_y} ${hokuyo_size_z}" />
+			</geometry>
+			<material name="green"/>
+		</visual>
+		<collision>
+			<geometry>
+				<box size="${hokuyo_size_x} ${hokuyo_size_y} ${hokuyo_size_z}" />
+			</geometry>
+		</collision>
+	</link>
+	<!-- Hokuyo - Joint -->
+	<joint name="hokuyo_joint" type="fixed">
+		<parent link="upperbase_link"/>
+		<child link="hokuyo_link"/>
+		<origin xyz="${hokuyo_offset_x} ${hokuyo_offset_y} ${hokuyo_offset_z}"/>
+    </joint>
+
 </robot>
 
