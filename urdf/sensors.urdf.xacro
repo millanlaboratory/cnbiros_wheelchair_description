@@ -59,14 +59,14 @@
 	<xacro:property name="sonar_0xf2_z"   	value="0.267" />
 	
 	<!-- Kinect offset (with respect to upperbase) -->
-	<xacro:property name="kinect_offset_x"	value="0.294" />	<!-- TEMP -->
-	<xacro:property name="kinect_offset_y" 	value="0.000" />	<!-- TEMP -->
-	<xacro:property name="kinect_offset_z" 	value="0.105" />	<!-- TEMP -->
+	<xacro:property name="kinect_offset_x"	value="0.985" />	
+	<xacro:property name="kinect_offset_y" 	value="0.000" />	
+	<xacro:property name="kinect_offset_z" 	value="0.851" /> <!-- !!! Wheelchair's elevation !!! -->
 	
 	<!-- Hokuyo offset (with respect to upperbase) -->
-	<xacro:property name="hokuyo_offset_x"	value="0.272" />	<!-- TEMP -->
-	<xacro:property name="hokuyo_offset_y" 	value="0.000" />	<!-- TEMP -->
-	<xacro:property name="hokuyo_offset_z" 	value="0.035" />	<!-- TEMP -->
+	<xacro:property name="hokuyo_offset_x"	value="0.985" />
+	<xacro:property name="hokuyo_offset_y" 	value="0.000" />
+	<xacro:property name="hokuyo_offset_z" 	value="0.341" /> <!-- !!! Wheelchair's elevation !!! -->	
 
 <!-- ****************** Sonar macro ***************************** -->
 
