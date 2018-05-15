@@ -59,9 +59,9 @@
 	<xacro:property name="sonar_0xf2_z"   	value="0.267" />
 	
 	<!-- Kinect offset (with respect to upperbase) -->
-	<xacro:property name="kinect_offset_x"	value="0.985" />	
+	<xacro:property name="kinect_offset_x"	value="-0.365" /> <!-- !!! cyclope !!! -->	
 	<xacro:property name="kinect_offset_y" 	value="0.000" />	
-	<xacro:property name="kinect_offset_z" 	value="0.851" /> <!-- !!! Wheelchair's elevation !!! -->
+	<xacro:property name="kinect_offset_z" 	value="1.353" /> <!-- !!! Wheelchair's elevation !!! -->
 	
 	<!-- Hokuyo offset (with respect to upperbase) -->
 	<xacro:property name="hokuyo_offset_x"	value="0.985" />
@@ -178,7 +178,7 @@
 	<joint name="camera_joint" type="fixed">
 		<parent link="upperbase_link"/>
 		<child link="camera_link"/>
-		<origin xyz="${kinect_offset_x} ${kinect_offset_y} ${kinect_offset_z}"/>
+		<origin xyz="${kinect_offset_x} ${kinect_offset_y} ${kinect_offset_z}" rpy="0 ${M_PI/9} 0"/>
     </joint>
 
 <!-- ****************** Hokuyo ***************************** -->
