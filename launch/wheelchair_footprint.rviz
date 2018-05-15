@@ -26,7 +26,7 @@ Panels:
     Experimental: false
     Name: Time
     SyncMode: 0
-    SyncSource: PointCloud
+    SyncSource: Repellors
 Visualization Manager:
   Class: ""
   Displays:
@@ -192,244 +192,44 @@ Visualization Manager:
       Topic: /odom
       Unreliable: false
       Value: true
-    - Class: rviz/Group
-      Displays:
-        - Alpha: 0.5
-          Buffer Length: 1
-          Class: rviz/Range
-          Color: 255; 255; 255
-          Enabled: true
-          Name: Sonar 0xe0 filtered
-          Queue Size: 100
-          Topic: /sonars/0xe0_filtered
-          Unreliable: false
-          Value: true
-        - Alpha: 0.5
-          Buffer Length: 1
-          Class: rviz/Range
-          Color: 255; 255; 255
-          Enabled: true
-          Name: Sonar 0xe2 filtered
-          Queue Size: 100
-          Topic: /sonars/0xe2_filtered
-          Unreliable: false
-          Value: true
-        - Alpha: 0.5
-          Buffer Length: 1
-          Class: rviz/Range
-          Color: 255; 255; 255
-          Enabled: true
-          Name: Sonar 0xe4 filtered
-          Queue Size: 100
-          Topic: /sonars/0xe4_filtered
-          Unreliable: false
-          Value: true
-        - Alpha: 0.5
-          Buffer Length: 1
-          Class: rviz/Range
-          Color: 255; 255; 255
-          Enabled: true
-          Name: Sonar 0xe6 filtered
-          Queue Size: 100
-          Topic: /sonars/0xe6_filtered
-          Unreliable: false
-          Value: true
-        - Alpha: 0.5
-          Buffer Length: 1
-          Class: rviz/Range
-          Color: 255; 255; 255
-          Enabled: true
-          Name: Sonar 0xe8 filtered
-          Queue Size: 100
-          Topic: /sonars/0xe8_filtered
-          Unreliable: false
-          Value: true
-        - Alpha: 0.5
-          Buffer Length: 1
-          Class: rviz/Range
-          Color: 255; 255; 255
-          Enabled: true
-          Name: Sonar 0xea filtered
-          Queue Size: 100
-          Topic: /sonars/0xea_filtered
-          Unreliable: false
-          Value: true
-        - Alpha: 0.5
-          Buffer Length: 1
-          Class: rviz/Range
-          Color: 255; 255; 255
-          Enabled: true
-          Name: Sonar 0xec filtered
-          Queue Size: 100
-          Topic: /sonars/0xec_filtered
-          Unreliable: false
-          Value: true
-        - Alpha: 0.5
-          Buffer Length: 1
-          Class: rviz/Range
-          Color: 255; 255; 255
-          Enabled: true
-          Name: Sonar 0xee filtered
-          Queue Size: 100
-          Topic: /sonars/0xee_filtered
-          Unreliable: false
-          Value: true
-        - Alpha: 0.5
-          Buffer Length: 1
-          Class: rviz/Range
-          Color: 255; 255; 255
-          Enabled: true
-          Name: Sonar 0xf0 filtered
-          Queue Size: 100
-          Topic: /sonars/0xf0_filtered
-          Unreliable: false
-          Value: true
-        - Alpha: 0.5
-          Buffer Length: 1
-          Class: rviz/Range
-          Color: 255; 255; 255
-          Enabled: true
-          Name: Sonar 0xf2 filtered
-          Queue Size: 100
-          Topic: /sonars/0xf2_filtered
-          Unreliable: false
-          Value: true
-      Enabled: false
-      Name: Sonars Filtered
-    - Class: rviz/Group
-      Displays:
-        - Alpha: 0.5
-          Buffer Length: 1
-          Class: rviz/Range
-          Color: 255; 255; 255
-          Enabled: true
-          Name: Sonar 0xe0
-          Queue Size: 100
-          Topic: /sonars/0xe0
-          Unreliable: false
-          Value: true
-        - Alpha: 0.5
-          Buffer Length: 1
-          Class: rviz/Range
-          Color: 255; 255; 255
-          Enabled: true
-          Name: Sonar 0xe2
-          Queue Size: 100
-          Topic: /sonars/0xe2
-          Unreliable: false
-          Value: true
-        - Alpha: 0.5
-          Buffer Length: 1
-          Class: rviz/Range
-          Color: 255; 255; 255
-          Enabled: true
-          Name: Sonar 0xe4
-          Queue Size: 100
-          Topic: /sonars/0xe4
-          Unreliable: false
-          Value: true
-        - Alpha: 0.5
-          Buffer Length: 1
-          Class: rviz/Range
-          Color: 255; 255; 255
-          Enabled: true
-          Name: Sonar 0xe6
-          Queue Size: 100
-          Topic: /sonars/0xe6
-          Unreliable: false
-          Value: true
-        - Alpha: 0.5
-          Buffer Length: 1
-          Class: rviz/Range
-          Color: 255; 255; 255
-          Enabled: true
-          Name: Sonar 0xe8
-          Queue Size: 100
-          Topic: /sonars/0xe8
-          Unreliable: false
-          Value: true
-        - Alpha: 0.5
-          Buffer Length: 1
-          Class: rviz/Range
-          Color: 255; 255; 255
-          Enabled: true
-          Name: Sonar 0xea
-          Queue Size: 100
-          Topic: /sonars/0xea
-          Unreliable: false
-          Value: true
-        - Alpha: 0.5
-          Buffer Length: 1
-          Class: rviz/Range
-          Color: 255; 255; 255
-          Enabled: true
-          Name: Sonar 0xec
-          Queue Size: 100
-          Topic: /sonars/0xec
-          Unreliable: false
-          Value: true
-        - Alpha: 0.5
-          Buffer Length: 1
-          Class: rviz/Range
-          Color: 255; 255; 255
-          Enabled: true
-          Name: Sonar 0xee
-          Queue Size: 100
-          Topic: /sonars/0xee
-          Unreliable: false
-          Value: true
-        - Alpha: 0.5
-          Buffer Length: 1
-          Class: rviz/Range
-          Color: 255; 255; 255
-          Enabled: true
-          Name: Sonar 0xf0
-          Queue Size: 100
-          Topic: /sonars/0xf0
-          Unreliable: false
-          Value: true
-        - Alpha: 0.5
-          Buffer Length: 1
-          Class: rviz/Range
-          Color: 255; 255; 255
-          Enabled: true
-          Name: Sonar 0xf2
-          Queue Size: 100
-          Topic: /sonars/0xf2
-          Unreliable: false
-          Value: true
-      Enabled: false
-      Name: Sonars Raw
     - Alpha: 1
-      Autocompute Intensity Bounds: true
+      Class: rviz/Polygon
+      Color: 255; 255; 255
+      Enabled: true
+      Name: Reset Goal
+      Topic: /visualize_reset_area
+      Unreliable: false
+      Value: true
+    - Alpha: 1
+      Autocompute Intensity Bounds: false
       Autocompute Value Bounds:
         Max Value: 10
         Min Value: -10
         Value: true
       Axis: Z
       Channel Name: intensity
-      Class: rviz/PointCloud
+      Class: rviz/LaserScan
       Color: 255; 255; 255
       Color Transformer: Intensity
       Decay Time: 0
-      Enabled: false
+      Enabled: true
       Invert Rainbow: false
-      Max Color: 255; 255; 255
-      Max Intensity: 4096
-      Min Color: 0; 0; 0
-      Min Intensity: 0
-      Name: Sonars PointCloud
+      Max Color: 0; 170; 0
+      Max Intensity: 5
+      Min Color: 255; 85; 0
+      Min Intensity: 1.69538212
+      Name: Repellors
       Position Transformer: XYZ
       Queue Size: 10
       Selectable: true
       Size (Pixels): 3
       Size (m): 0.0500000007
       Style: Flat Squares
-      Topic: /sonar_pointcloud
+      Topic: /visualization/sectors
       Unreliable: false
       Use Fixed Frame: true
-      Use rainbow: true
-      Value: false
+      Use rainbow: false
+      Value: true
   Enabled: true
   Global Options:
     Background Color: 48; 48; 48
@@ -491,5 +291,5 @@ Window Geometry:
   Views:
     collapsed: true
   Width: 1248
-  X: 1312
+  X: 65
   Y: 24
