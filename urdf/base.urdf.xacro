@@ -163,7 +163,7 @@
 
 	<link name="upperbase_link">
 		<inertial>
-			<mass value="10"/>
+			<mass value="50"/>
 			<inertia
 				ixx="1" ixy="0.0" ixz="0.0"
 				iyy="1" iyz="0.0"
@@ -221,7 +221,7 @@
 
 	<link name="bottomseat_link">
 		<inertial>
-			<mass value="10"/>
+			<mass value="5"/>
 			<inertia
 				ixx="1" ixy="0.0" ixz="0.0"
 				iyy="1" iyz="0.0"
@@ -250,7 +250,7 @@
 
 	<link name="backseat_link">
 		<inertial>
-			<mass value="10"/>
+			<mass value="1"/>
 			<inertia
 				ixx="1" ixy="0.0" ixz="0.0"
 				iyy="1" iyz="0.0"
@@ -279,7 +279,7 @@
 
 	<link name="lowerplatform_link">
 		<inertial>
-			<mass value="10"/>
+			<mass value="1"/>
 			<inertia
 				ixx="1" ixy="0.0" ixz="0.0"
 				iyy="1" iyz="0.0"
@@ -308,7 +308,7 @@
 
 	<link name="upperplatform_link">
 		<inertial>
-			<mass value="10"/>
+			<mass value="1"/>
 			<inertia
 				ixx="1" ixy="0.0" ixz="0.0"
 				iyy="1" iyz="0.0"
@@ -336,7 +336,7 @@
 
 	<link name="armrest_right_link">
 		<inertial>
-			<mass value="10"/>
+			<mass value="0.5"/>
 			<inertia
 				ixx="1" ixy="0.0" ixz="0.0"
 				iyy="1" iyz="0.0"
@@ -364,7 +364,7 @@
 
 	<link name="armrest_left_link">
 		<inertial>
-			<mass value="10"/>
+			<mass value="0.5"/>
 			<inertia
 				ixx="1" ixy="0.0" ixz="0.0"
 				iyy="1" iyz="0.0"
